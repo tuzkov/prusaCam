@@ -1,0 +1,10 @@
+[Unit]
+Description=prusacam service
+
+[Service]
+WorkingDirectory=/opt/prusacam
+ExecStart=/opt/prusacam/prusacam
+SyslogIdentifier=prusacam
+
+[Install]
+WantedBy=multi-user.target
