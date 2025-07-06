@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"time"
 
 	prusalinkclient "github.com/tuzkov/prusaCam/prusaLinkClient"
@@ -82,7 +83,7 @@ func cameraOpts() []string {
 // runs CLI commant to take shot from camera and returns path to it
 // rpicam-still --encoding jpg --rotation 180 -n --roi 0.2,0,0.6,1 --lens-position 1.01 --immediate --width 2764
 func (c *rpiCamera) takeShot(ctx context.Context) (string, error) {
-	name := fmt.Sprintf("%d.jpg", time.Now().UnixMicro())
+	name := filepath.Join(c.tmpDir, fmt.Sprintf("%d.jpg", time.Now().UnixMicro()))
 	args := append(cameraOpts(),
 		"--immediate",
 		"-o", name,
